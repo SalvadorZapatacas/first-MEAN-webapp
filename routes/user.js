@@ -14,10 +14,20 @@ var api = express.Router();
 var md_auth = require('../middlewares/authenticated');
 
 
+//Cargamos multiparty para subir ficheros
+var multipart = require('connect-multiparty');
+//Creamos middleware con el multipart y le indicamos la ruta de subida
+var md_upload = multipart({ uploadDir: './uploads/users'});
+
+
+
+
 api.get('/probando-controlador', md_auth.ensureAuth, UserController.pruebas);
 api.post('/register', UserController.saveUser);
 api.post('/login', UserController.loginUser);
 api.put('/update-user/:id',md_auth.ensureAuth ,UserController.updateUser);
+api.post('/upload-image-user/:id', [md_upload, md_auth.ensureAuth] ,UserController.uploadImage);
+
 
 
 

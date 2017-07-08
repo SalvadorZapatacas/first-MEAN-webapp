@@ -124,6 +124,42 @@ function updateUser(req, res){
 }
 
 
+function uploadImage(req, res){
+
+    var userId = req.params.id;
+    var file_name = 'Imagen no subida';
+
+    //files gracias a multipart
+    if(req.files){
+        var file_path = req.files.image.path;
+        var file_split = file_path.split('\\');
+        var file_name = file_split[2];
+
+        var ext_split = file_name.split('\.');
+        var file_ext =ext_split[1].toLowerCase();
+
+        if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif'){
+
+            User.findByIdAndUpdate(userId, {image: file_name}, (err, userUpdated) => {
+                if(!userUpdated){
+                     res.status(404).send({message: 'No se ha podido actualizar el usuario'});
+                }else{
+                     res.status(200).send({user: userUpdated});
+                }
+            });
+
+        }else{
+             res.status(200).send({message: 'Extension no válida'});
+        }
+
+    }else{
+        res.status(200).send({message: 'No se ha subido ninguna imagen'});
+    }
+
+
+}
+
+
 
 
 //Aquí exportamos todos los métodos
@@ -133,6 +169,7 @@ module.exports = {
     pruebas,
     saveUser,
     loginUser,
-    updateUser
+    updateUser,
+    uploadImage
 
 }
