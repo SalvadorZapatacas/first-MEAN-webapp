@@ -7,6 +7,10 @@ var bcrypt = require('bcrypt-nodejs');
 
 var jwt = require('../services/jwt');
 
+//Importamos fs y path para acceder a rutas y utilizar el sistema de ficheros
+var fs = require('fs');
+var path = require('path');
+
 function pruebas(req, res){
     res.status(200).send({
         message: 'Probando una acción del controlador de usuarios del API REST con Node y Mongo'
@@ -160,6 +164,28 @@ function uploadImage(req, res){
 }
 
 
+function getImageFile(req, res){
+
+    var imageFile = req.params.imageFile;
+
+    var path_file = './uploads/users/'+imageFile;
+
+    //Comprobamos si existe el fichero en el servidor
+    fs.exists(path_file , (exists) =>{
+        if(exists){
+            res.sendFile(path.resolve(path_file));
+        }else{
+             res.status(200).send({message: 'No existe la imagen'});
+        }
+    });
+
+
+
+
+}
+
+
+
 
 
 //Aquí exportamos todos los métodos
@@ -170,6 +196,7 @@ module.exports = {
     saveUser,
     loginUser,
     updateUser,
-    uploadImage
+    uploadImage,
+    getImageFile
 
 }
