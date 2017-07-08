@@ -5,6 +5,8 @@ var User = require('../models/user');
 
 var bcrypt = require('bcrypt-nodejs');
 
+var jwt = require('../services/jwt');
+
 function pruebas(req, res){
     res.status(200).send({
         message: 'Probando una acción del controlador de usuarios del API REST con Node y Mongo'
@@ -79,6 +81,10 @@ function loginUser(req, res){
                         //devolver los datos del usuario logueado
                         if(params.gethash){
                             //Devolver token jwt
+                            //El 'user' que se pasa como parámetro viene del callback de findOne
+                            res.status(200).send({
+                                token: jwt.createToken(user)
+                            });
                         }else{
                             res.status(200).send({user});
                         }
