@@ -12,6 +12,7 @@ var api = express.Router();
 
 api.get('/pruebas', UserController.pruebas);
 api.post('/register', UserController.saveUser);
+api.post('/login', UserController.loginUser);
 
 
 

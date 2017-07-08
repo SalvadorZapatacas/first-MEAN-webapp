@@ -54,6 +54,41 @@ function saveUser(req, res){
         res.status(500).send({message : 'Introduce la contraseña'});
     }
 
+}
+
+
+function loginUser(req, res){
+
+    var params = req.body;
+
+    var email = params.email;
+    var password = params.password;
+
+    //Buscamos mediante Mongoose
+    User.findOne({email : email.toLowerCase()} , (err, user) => {
+        if(err){
+            res.status(500).send({message: 'Error en la petición'});
+        }else{
+            if(!user){
+                res.status(404).send({message: 'El usuario no existe'});
+            }else{
+                //Comprobar que coincide la passwd
+                //user.password viene del callback del metodo findOne
+                bcrypt.compare(password, user.password, (err, check) =>{
+                    if(check){
+                        //devolver los datos del usuario logueado
+                        if(params.gethash){
+                            //Devolver token jwt
+                        }else{
+                            res.status(200).send({user});
+                        }
+                    }else{
+                        res.status(404).send({message: 'El usuario no ha podido loguearse'});
+                    }
+                });
+            }
+        }
+    });
 
 }
 
@@ -65,6 +100,7 @@ function saveUser(req, res){
 module.exports = {
 
     pruebas,
-    saveUser
+    saveUser,
+    loginUser
 
 }
