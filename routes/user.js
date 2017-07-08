@@ -10,7 +10,11 @@ var UserController = require('../controllers/user');
 // Creamos un router para las rutas
 var api = express.Router();
 
-api.get('/pruebas', UserController.pruebas);
+//Cargamos el Middleware
+var md_auth = require('../middlewares/authenticated');
+
+
+api.get('/probando-controlador', md_auth.ensureAuth, UserController.pruebas);
 api.post('/register', UserController.saveUser);
 api.post('/login', UserController.loginUser);
 
