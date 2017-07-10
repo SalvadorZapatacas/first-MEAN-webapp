@@ -4,6 +4,10 @@
 var path = require('path');
 var fs = require('fs');
 
+//Cargamos esta libreria para paginar
+var mongoosePaginate = require('mongoose-pagination');
+
+
 //Cargamos modelos
 var Artist = require('../models/artist');
 var Album = require('../models/album');
@@ -55,9 +59,44 @@ function saveArtist(req, res){
 }
 
 
+function getArtists(req, res){
+
+    if(req.params.page){
+        var page = req.params.page;
+    }else{
+        var page = 1;
+    }
+    
+    var itemsPerPage = 3;
+
+    //.paginate() es de la libreria mongoose-pagination
+    Artist.find().sort('name').paginate(page, itemsPerPage , (err, artists, total) => {
+        if(err){
+            res.status(500).send({message: 'Error en la petición'});
+        }else{
+            if(!artists){
+                res.status(404).send({message: 'No hay artistas'});
+            }else{
+                // Le ponemos return para asegurarnos que funciona siempre
+
+                return res.status(200).send({
+                    total_items: total,
+                    artist: artists
+                });
+            }
+        }
+    });
+
+
+
+
+}
+
+
 
 
 module.exports = {
     getArtist,
-    saveArtist
+    saveArtist,
+    getArtists
 };
