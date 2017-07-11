@@ -19,6 +19,7 @@ var md_upload = multipart({ uploadDir: './uploads/songs'});
 
 
 api.get('/song', md_auth.ensureAuth , SongController.getSong);
+api.post('/song', md_auth.ensureAuth , SongController.saveSong);
 
 
 module.exports = api;
