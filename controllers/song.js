@@ -34,6 +34,45 @@ function getSong(req , res){
 }
 
 
+function getSongs(req, res){
+
+    var albumId = req.params.album;
+
+    if(!albumId){
+        var find = Song.find({}).sort('number');
+    }else{
+        var find = Song.find({album : albumId}).sort('number');
+    }
+
+    /**
+     * A continuación , además de popular el album, lo que hacemos es crear otra propiedad 
+     * que se llame populate y le pasamos un objeto y hacemos lo mismo y hay que indicarle también
+     * el modelo y el path.
+     * 
+     * En este caso lo que estamos haciendo es sacar una cancion y en su propiedad album sacar tambien 
+     * toda la información de ese album y ADEMÁS , en ese album incluir toda la información del artista
+     * Recuerda que hay que indicarle el modelo tambien
+     */
+    find.populate({
+        path : 'album',
+        populate : {
+            path : 'artist',
+            model : 'Artist'
+        }
+    }).exec((err, songs) => {
+        if(err){
+            res.status(500).send({message : 'Error en el servidor'});
+        }else{
+            if(!songs){
+                res.status(404).send({message : 'No hay canciones'});
+            }else{
+                res.status(200).send({songs});
+            }
+        }
+    });
+
+
+}
 
 
 
@@ -70,5 +109,7 @@ function saveSong(req, res){
 
 module.exports = {
     getSong,
+    getSongs,
     saveSong
+    
 }
