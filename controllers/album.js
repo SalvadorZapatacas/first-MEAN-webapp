@@ -95,11 +95,6 @@ function updateAlbum(req, res){
 
 
 
-
-
-
-
-
 function saveAlbum(req, res){
 
     //Instanciamos el modelo
@@ -129,6 +124,48 @@ function saveAlbum(req, res){
 
 
 
+function deleteAlbum(req, res){
+
+    var albumId = req.params.id;
+
+
+
+    /**
+     * Eliminamos el album y sus canciones
+     */
+    Album.findByIdAndRemove(albumId , (err, albumRemoved) =>{
+                    if(err){
+                        res.status(500).send({message: 'Error al eliminar el album'});
+                    }else{
+                        if(!albumRemoved){
+                            res.status(404).send({message: 'El album no ha sido eliminado'});
+                        }else{
+
+                            // Eliminamos las canciones
+
+
+                            Song.find({album : albumRemoved._id}).remove((err, songRemoved) =>{
+                                if(err){
+                                    res.status(500).send({message: 'Error al eliminar las cancione'});
+                                }else{
+                                    if(!songRemoved){
+                                        res.status(404).send({message: 'La cancion no ha sido eliminada'});
+                                    }else{
+                                        res.status(200).send({album: albumRemoved});
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+
+}
+
+
+
+
+
+
 
 
 
@@ -137,5 +174,6 @@ module.exports = {
     getAlbum,
     saveAlbum,
     getAlbums,
-    updateAlbum
+    updateAlbum,
+    deleteAlbum
 }
