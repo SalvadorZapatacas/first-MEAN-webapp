@@ -145,6 +145,64 @@ function deleteSong(req, res){
 
 
 
+function uploadFile(req, res){
+
+    var songId = req.params.id;
+    var file_name = 'Imagen no subida';
+
+    //Recogemos los ficheros de la req
+    if(req.files){
+        var file_path = req.files.file.path;
+        var file_split = file_path.split('\\');
+        var file_name = file_split[2];
+
+        var ext_split = file_name.split('\.');
+        var file_ext =ext_split[1].toLowerCase();
+
+        if(file_ext == 'mp3' || file_ext == 'ogg'){
+
+            Song.findByIdAndUpdate(songId, {file: file_name}, (err, songUpdated) => {
+                if(!songUpdated){
+                     res.status(404).send({message: 'No se ha podido actualizar la canción'});
+                }else{
+                     res.status(200).send({song: songUpdated});
+                }
+            });
+
+        }else{
+             res.status(200).send({message: 'Extension no válida'});
+        }
+
+    }else{
+        res.status(200).send({message: 'No se ha subido ningun archivo'});
+    }
+
+
+}
+
+
+
+
+function getSongFile(req, res){
+
+    var imageFile = req.params.songFile;
+
+    var path_file = './uploads/songs/'+imageFile;
+
+    //Comprobamos si existe el fichero en el servidor
+    fs.exists(path_file , (exists) =>{
+        if(exists){
+            res.sendFile(path.resolve(path_file));
+        }else{
+             res.status(200).send({message: 'No existe el fichero de audio'});
+        }
+    });
+
+
+
+
+}
+
 
 
 module.exports = {
@@ -152,6 +210,8 @@ module.exports = {
     getSongs,
     saveSong,
     updateSong,
-    deleteSong
+    deleteSong,
+    uploadFile,
+    getSongFile
     
 }
