@@ -24,8 +24,39 @@ export class UserService{
         this.url = GLOBAL.url;
     }
 
-    signup(){
-        return 'Hola mundo desde el servicio';
+    /**
+     * 
+     * Sirve para loguear el usuario
+     * Si le pasamos el gethash nos saca el hash
+     */
+    signup(user_to_login, gethash = null){
+
+        console.log(this.url + 'login');
+
+        if(gethash){
+            user_to_login.gethash = gethash;
+        }
+
+
+        // Pasamos a string el objeto
+        let json = JSON.stringify(user_to_login);
+        let params = json;
+
+        //Configuramos cabeceras, como usamos js en el server le pasamos ese content-type
+        let headers = new Headers({'Content-Type' : 'application/json'});
+
+        /**
+         * Utiliza _http que se ha creado en el constructor , y se le hace una
+         * llamada por post a esa url , como segundo parametro se le pasa
+         * los params que es el objeto user_to_login
+         * y despues un objeto headers
+         * 
+         * Con map, capturas la respuesta y en el callback recibes la respuesta y codificas 
+         * la respuesta en un JSON usable
+         */
+
+        return this._http.post(this.url + 'login' , params, {headers: headers})
+                          .map(res => res.json());
     }
 
 

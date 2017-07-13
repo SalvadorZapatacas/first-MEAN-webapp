@@ -14,6 +14,12 @@
   <div class="col-lg-6">
     <h1>Identificate</h1>
 
+    <div *ngIf="errorMessage">
+      <div class="alert alert-info">
+        <strong>OJO!</strong> {{errorMessage}}
+      </div>
+    </div>
+
     <!-- La '#' en la etiqueta form es  para darle un nombre y le indicas que es un form de angular-->
 
     <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-7">
