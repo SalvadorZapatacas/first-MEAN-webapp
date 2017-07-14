@@ -127,5 +127,16 @@ export class AppComponent implements OnInit{
 
 
 
+  logout(){
+    // Esto hace un borrado de todo , pero tambien se podria borrar items con .removeItem('identity');
+    localStorage.removeItem('identity');
+    localStorage.removeItem('token');
+    localStorage.clear();
+    this.identity = null;
+    this.token = null
+  }
+
+
+
 
 }

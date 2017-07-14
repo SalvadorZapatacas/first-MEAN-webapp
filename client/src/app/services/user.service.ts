@@ -35,7 +35,7 @@ export class UserService{
      */
     signup(user_to_login, gethash = null){
 
-        console.log(this.url + 'login');
+        //console.log(this.url + 'login');
 
         if(gethash){
             user_to_login.gethash = gethash;
@@ -96,6 +96,8 @@ export class UserService{
     }
 
 
+
+    
 
 
 
