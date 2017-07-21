@@ -19,6 +19,7 @@ import { User } from './models/user';
 export class AppComponent implements OnInit{
   public title = 'MUSIFY!';
   public user : User;
+  public user_register : User;
 
   //Aquí van los datos del usuario logueado
   public identity;
@@ -27,12 +28,15 @@ export class AppComponent implements OnInit{
 
   public errorMessage;
 
+  public alertRegister;
+
   // Asigna valor a las propiedades ( un constructor vaya ...)
   //Más adelante mediante formulario se irán metiendo valores
   constructor(
     private _userService : UserService
   ){
     this.user = new User('','','','','','ROLE_USER','');
+    this.user_register = new User('','','','','','ROLE_USER','');
 
   }
 
@@ -86,11 +90,7 @@ export class AppComponent implements OnInit{
                         // Creamos elemento (sesion) en el localstorage para tener el token disponible
                         //No hace falta pasar el token a String porque ya lo es
                       localStorage.setItem('token', token);
-
-                      console.log(token);
-                      console.log(identity);
-
-                      
+                      this.user = new User('','','','','','ROLE_USER','');
                     }
 
                   },
@@ -134,6 +134,37 @@ export class AppComponent implements OnInit{
     localStorage.clear();
     this.identity = null;
     this.token = null
+  }
+
+
+  onSubmitRegister(){
+    console.log(this.user_register);
+
+    this._userService.register(this.user_register).subscribe(
+      response => {
+
+        let user = response.user;
+        this.user_register = user;
+
+        if(!user._id){
+          this.alertRegister = 'Error al registrarse';
+        }else{
+          this.alertRegister = 'El registro se ha realizado con éxito, identificate con ' + this.user_register.email;
+          this.user_register = new User('','','','','','ROLE_USER','');
+        }
+
+      },
+      error => {
+        var errorMessage = <any>error;
+
+        if(errorMessage != null){
+          var body = JSON.parse(error._body);
+          this.alertRegister = body.message;
+
+          console.log(error);
+        }
+      }
+    );
   }
 
 
