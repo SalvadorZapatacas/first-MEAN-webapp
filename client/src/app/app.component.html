@@ -30,7 +30,7 @@
     </span>
       <br/>
     <span>
-      <a href="#">
+      <a [routerLink]="['/mis-datos']">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
            Mis datos 
       </a>
@@ -42,7 +42,7 @@
 
 <div *ngIf="identity" class="central col-lg-11">
   <p>Estas logueado en la aplicación</p>
-  <user-edit></user-edit>
+  <router-outlet></router-outlet>
 </div>
 
 <div class="col-lg-12" *ngIf="!identity">
