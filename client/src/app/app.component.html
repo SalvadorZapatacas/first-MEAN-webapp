@@ -2,12 +2,40 @@
   <h1>
     Welcome to {{title}}!!
   </h1>
-  <span>
-    Bienvenido {{identity.name}} {{identity.surname}}
-  </span>
-  <span (click) ="logout()" class="btn btn-danger">
-      Cerrar sesión
-  </span>
+
+  <nav id="navigation">
+    <a href="#">
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+           Buscar 
+    </a>
+    <br/>
+    <a href="#">
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+           Artistas 
+    </a>
+    <br/>
+    <a href="#">
+        <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+           Albums 
+      </a>
+  </nav>
+
+  <nav id="user_logged">
+    <span>
+      Bienvenid@ {{identity.name}}
+    </span>
+    <br/>
+    <span (click) ="logout()" class="btn btn-warning">
+        Cerrar sesión
+    </span>
+      <br/>
+    <span>
+      <a href="#">
+        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+           Mis datos 
+      </a>
+    </span>
+  </nav>
 </div>
 
 <div class="clearfix"></div>
