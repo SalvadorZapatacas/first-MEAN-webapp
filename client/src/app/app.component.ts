@@ -133,7 +133,8 @@ export class AppComponent implements OnInit{
     localStorage.removeItem('token');
     localStorage.clear();
     this.identity = null;
-    this.token = null
+    this.token = null;
+    this.user = new User('','','','','','ROLE_USER','');
   }
 
 

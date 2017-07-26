@@ -21,7 +21,7 @@ import { UserEditComponent } from './components/user-edit.component';
     HttpModule,
     routing
   ],
-  providers: [ appRoutingProviders ],
+  providers: [ appRoutingProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
