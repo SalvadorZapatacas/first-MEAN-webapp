@@ -7,6 +7,8 @@ import { UserService } from './services/user.service';
 //Importamos modelo usuario
 import { User } from './models/user';
 
+import { GLOBAL } from './services/global';
+
 
 
 //inyeccion de dependencias e incluimos el servicio
@@ -30,6 +32,8 @@ export class AppComponent implements OnInit{
 
   public alertRegister;
 
+  public url : string;
+
   // Asigna valor a las propiedades ( un constructor vaya ...)
   //Más adelante mediante formulario se irán metiendo valores
   constructor(
@@ -37,6 +41,7 @@ export class AppComponent implements OnInit{
   ){
     this.user = new User('','','','','','ROLE_USER','');
     this.user_register = new User('','','','','','ROLE_USER','');
+    this.url = GLOBAL.url;
 
   }
 
