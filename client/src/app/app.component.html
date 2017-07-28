@@ -12,7 +12,7 @@
            Buscar 
     </a>
     
-    <a href="#">
+    <a [routerLink]="['/artists' , 1]">
         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
            Artistas 
     </a>
@@ -49,7 +49,7 @@
 
 
 
-<div *ngIf="identity" class="central col-lg-11">
+<div [class.hidden]="!identity" class="central col-lg-11">
   <router-outlet></router-outlet>
 </div>
 
