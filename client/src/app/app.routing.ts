@@ -10,7 +10,11 @@ import { ArtistListComponent } from './components/artist-list.component';
 
 
 const appRoutes : Routes = [
-    
+    {
+        path: '',
+        redirectTo : '/artists/1',
+        pathMatch : 'full'
+    },
     { path : '' , component: ArtistListComponent },
     { path : 'artists/:page' , component: ArtistListComponent },
     { path : 'mis-datos' , component: UserEditComponent },
