@@ -12,12 +12,15 @@ import { UserEditComponent } from './components/user-edit.component';
 
 import { ArtistListComponent } from './components/artist-list.component';
 
+import { HomeComponent } from './components/home.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     UserEditComponent,
-    ArtistListComponent
+    ArtistListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

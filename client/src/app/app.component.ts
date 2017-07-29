@@ -1,5 +1,8 @@
 import { Component , OnInit } from '@angular/core';
 
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
+
 //Importamos servicio
 import { UserService } from './services/user.service';
 
@@ -37,6 +40,8 @@ export class AppComponent implements OnInit{
   // Asigna valor a las propiedades ( un constructor vaya ...)
   //Más adelante mediante formulario se irán metiendo valores
   constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
     private _userService : UserService
   ){
     this.user = new User('','','','','','ROLE_USER','');
@@ -140,6 +145,8 @@ export class AppComponent implements OnInit{
     this.identity = null;
     this.token = null;
     this.user = new User('','','','','','ROLE_USER','');
+
+    this._router.navigate(['/']);
   }
 
 

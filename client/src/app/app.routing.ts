@@ -8,17 +8,15 @@ import { UserEditComponent } from './components/user-edit.component';
 // Import artist
 import { ArtistListComponent } from './components/artist-list.component';
 
+//Import Home
+import { HomeComponent } from './components/home.component';
+
 
 const appRoutes : Routes = [
-    {
-        path: '',
-        redirectTo : '/artists/1',
-        pathMatch : 'full'
-    },
-    { path : '' , component: ArtistListComponent },
+    { path : '' , component: HomeComponent },
     { path : 'artists/:page' , component: ArtistListComponent },
     { path : 'mis-datos' , component: UserEditComponent },
-    { path : '**' , component: ArtistListComponent } 
+    { path : '**' , component: HomeComponent } 
 
 ];
 
