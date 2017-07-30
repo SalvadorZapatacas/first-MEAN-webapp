@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit{
         private _router: Router,
     ){
 
-        this.titulo = 'Home';
+        this.titulo = '¡ Bienvenido a Musify !';
     }
 
     ngOnInit(){
