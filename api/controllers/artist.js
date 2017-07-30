@@ -103,7 +103,7 @@ function updateArtist(req, res){
             if(!artistUpdated){
                  res.status(404).send({message: 'El artista no ha sido actualizado'});
             }else{
-                res.status(200).send({message: artistUpdated});
+                res.status(200).send({artist: artistUpdated});
             }
         }
     });

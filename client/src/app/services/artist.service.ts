@@ -67,7 +67,7 @@ export class ArtistService{
             'Authorization' : token 
         });
 
-        return this._http.put(this.url+'artist/'+id ,params,{headers : headers})
+        return this._http.put(this.url+'artist/'+id , params ,{headers : headers})
                          .map(res=> res.json());
     }
 
