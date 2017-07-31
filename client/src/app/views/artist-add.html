@@ -1,4 +1,4 @@
-<div  class="col-lg-6">
+<div  class="col-lg-6" *ngIf="identity && identity.role == 'ROLE_ADMIN'">
 
 
     <h1>{{titulo}}</h1>
@@ -54,4 +54,10 @@
 
     </form>
 
+</div>
+
+
+<div  class="col-lg-6" *ngIf="!identity || identity.role != 'ROLE_ADMIN'">
+    <h1>Error</h1>
+        <p>no tienes acceso a esta parte de la aplicacion</p>
 </div>

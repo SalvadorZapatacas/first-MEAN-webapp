@@ -67,7 +67,7 @@ function getArtists(req, res){
         var page = 1;
     }
     
-    var itemsPerPage = 3;
+    var itemsPerPage = 4;
 
     //.paginate() es de la libreria mongoose-pagination
     Artist.find().sort('name').paginate(page, itemsPerPage , (err, artists, total) => {
@@ -81,7 +81,7 @@ function getArtists(req, res){
 
                 return res.status(200).send({
                     total_items: total,
-                    artist: artists
+                    artists: artists
                 });
             }
         }
