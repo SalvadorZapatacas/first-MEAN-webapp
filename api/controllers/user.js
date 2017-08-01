@@ -141,13 +141,13 @@ function uploadImage(req, res){
     //files gracias a multipart
     if(req.files){
         var file_path = req.files.image.path;
-        var file_split = file_path.split('\\');
+        var file_split = file_path.split(path.sep);
         var file_name = file_split[2];
 
         var ext_split = file_name.split('\.');
         var file_ext =ext_split[1].toLowerCase();
 
-        if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif'){
+        if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif' || file_ext == 'jpeg'){
 
             User.findByIdAndUpdate(userId, {image: file_name}, (err, userUpdated) => {
                 if(!userUpdated){

@@ -153,7 +153,7 @@ function uploadFile(req, res){
     //Recogemos los ficheros de la req
     if(req.files){
         var file_path = req.files.file.path;
-        var file_split = file_path.split('\\');
+        var file_split = file_path.split(path.sep);
         var file_name = file_split[2];
 
         var ext_split = file_name.split('\.');
