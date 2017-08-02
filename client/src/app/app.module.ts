@@ -18,6 +18,8 @@ import { ArtistAddComponent } from './components/artist-add.component';
 
 import { ArtistEditComponent } from './components/artist-edit.component';
 
+import { ArtistDetailComponent } from './components/artist-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { ArtistEditComponent } from './components/artist-edit.component';
     ArtistListComponent,
     HomeComponent,
     ArtistAddComponent,
-    ArtistEditComponent
+    ArtistEditComponent,
+    ArtistDetailComponent
   ],
   imports: [
     BrowserModule,
