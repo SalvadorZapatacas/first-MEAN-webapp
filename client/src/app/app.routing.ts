@@ -20,7 +20,7 @@ const appRoutes : Routes = [
     { path : 'artistas/:page' , component: ArtistListComponent },
     { path : 'crear-artista' , component: ArtistAddComponent },
     { path : 'editar-artista/:id' , component: ArtistEditComponent },
-    { path : 'artista/:id' , component: ArtistEditComponent },   
+    { path : 'artista/:id' , component: ArtistDetailComponent },   
     { path : 'mis-datos' , component: UserEditComponent },
     { path : '**' , component: HomeComponent } 
 
