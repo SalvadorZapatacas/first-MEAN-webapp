@@ -48,7 +48,21 @@ export class AlbumAddComponent implements OnInit{
     }
 
     ngOnInit(){
-        console.log('adlbum-add component cargado');
+        console.log('album-add component cargado');
+    }
+
+
+    onSubmit(){
+        console.log("Clickado en onSubmit");
+
+        
+        this._route.params.forEach(( params : Params) => {
+            let artist_id = params['artist'];
+            this.album.artist = artist_id;
+        });
+        
+        
+        console.log(this.album);
     }
 
 
