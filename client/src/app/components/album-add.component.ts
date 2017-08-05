@@ -60,6 +60,7 @@ export class AlbumAddComponent implements OnInit{
 
         
         this._route.params.forEach(( params : Params) => {
+            // params['artist'] , se accede asi a él porque así lo hemos definido en las rutas.
             let artist_id = params['artist'];
             this.album.artist = artist_id;
         });
