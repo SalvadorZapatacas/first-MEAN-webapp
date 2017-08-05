@@ -18,6 +18,7 @@ import { HomeComponent } from './components/home.component';
 //Import Album
 
 import { AlbumAddComponent } from './components/album-add.component';
+import { AlbumEditComponent } from './components/album-edit.component';
 
 
 const appRoutes : Routes = [
@@ -28,6 +29,7 @@ const appRoutes : Routes = [
     { path : 'artista/:id' , component: ArtistDetailComponent },   
     { path : 'mis-datos' , component: UserEditComponent },
     { path : 'crear-album/:artist' , component: AlbumAddComponent },
+    { path : 'editar-album/:id' , component: AlbumEditComponent },
     { path : '**' , component: HomeComponent } 
 
 ];
