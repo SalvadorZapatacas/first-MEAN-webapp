@@ -41,6 +41,30 @@ export class AlbumService{
 
 
 
+    // Si no le pasamos artistId , sacará todos los albums de la WebApp
+    getAlbums(token, artistId = null){
+        let headers = new Headers({
+            'Content-type' : 'application/json',
+            'Authorization' : token 
+        });
+
+        // Esto para pasarle las cabeceras a un http por GET
+        let options = new RequestOptions({headers : headers});
+
+        if(artistId == null){
+            return this._http.get(this.url + 'albums/', options)
+                         .map ( res => res.json());
+        }else{
+            return this._http.get(this.url + 'albums/' + artistId , options)
+                         .map ( res => res.json());
+        }
+
+
+    }
+
+
+
+
     editAlbum(token, id , album : Album){
         let params = JSON.stringify(album);
         let headers = new Headers({
@@ -69,6 +93,10 @@ export class AlbumService{
     }
 
     
+
+
+
+
 
 
 }
