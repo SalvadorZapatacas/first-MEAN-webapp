@@ -93,7 +93,22 @@ export class AlbumService{
     }
 
     
+    
 
+    deleteAlbum(token, id : string){
+
+        let headers = new Headers({
+            'Content-type' : 'application/json',
+            'Authorization' : token 
+        });
+
+        // Esto para pasarle las cabeceras a un http por GET
+        let options = new RequestOptions({headers : headers});
+
+        return this._http.delete(this.url + 'album/' + id , options)
+                         .map ( res => res.json());
+
+    }
 
 
 
